@@ -6,9 +6,10 @@ namespace Core.Entities
     {
         [Required]
         [EmailAddress]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         [Required]
-        public string SenhaHash { get; set; }
+        public string SenhaHash { get; set; } = string.Empty;
     }
+
 }
