@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Interfaces;
+
 
 namespace Core.Interfaces
 {
     public interface IUsuarioRepository
     {
-        void AdicionarUsuario(Usuario usuario);
-        Usuario ObterUsuario(string username);
+        Task AdicionarUsuarioAsync(Usuario usuario); 
+        Task<Usuario> ObterUsuarioAsync(string username); 
     }
 }
-

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Core.Entities;
 using Core.Interfaces;
 
+using Microsoft.EntityFrameworkCore;
+
+
 namespace Infrastructure.Data
 {
     public class UsuarioRepository : IUsuarioRepository
@@ -17,15 +20,18 @@ namespace Infrastructure.Data
             _context = context;
         }
 
-        public void AdicionarUsuario(Usuario usuario)
+        public async Task AdicionarUsuarioAsync(Usuario usuario)
         {
-            _context.Usuarios.Add(usuario);
-            _context.SaveChanges();
+            await _context.Usuarios.AddAsync(usuario);
+            await _context.SaveChangesAsync();
+        }
+    
+
+        public async Task<Usuario> ObterUsuarioAsync(string username)
+        {
+            return await _context.Usuarios.FirstOrDefaultAsync(u => u.Username == username);
         }
 
-        public Usuario ObterUsuario(string username)
-        {
-            return _context.Usuarios.FirstOrDefault(u => u.Username == username);
-        }
     }
 }
+
