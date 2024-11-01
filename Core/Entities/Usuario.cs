@@ -26,7 +26,7 @@ namespace Core.Entities
         public string SenhaHash { get; set; } = string.Empty;
 
         [Required]
-        public DateTime DataRegistro { get; set; }
+        public DateTime Data_Registro { get; set; }
 
         [Required]
         [Phone]
