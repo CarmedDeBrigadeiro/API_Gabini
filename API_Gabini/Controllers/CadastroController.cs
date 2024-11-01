@@ -15,16 +15,16 @@ namespace API_Gabini.Controllers
         {
             _authService = authService;
         }
-            
 
-        //[HttpPost("register")]
-        //public async Task<IActionResult> Register([FromBody] Usuario usuario)
-        //{
-        //    var result = await _authService.Register(usuario);
-        //    if (result == "Usuário já registrado!")
-        //        return Conflict(result);
 
-        //    return Ok(result);
-        //}
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] Usuario usuario)
+        {
+            var result = await _authService.Register(usuario);
+            if (result == "Usuário já registrado!")
+                return Conflict(result);
+
+            return Ok(result);
+        }
     }
 }
