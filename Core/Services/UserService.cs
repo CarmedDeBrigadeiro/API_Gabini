@@ -11,8 +11,14 @@ namespace Core.Services
 
         public Usuario GetUserById(int id)
         {
-            return usuarios.FirstOrDefault(u => u.Id == id);
+            var usuario = usuarios.FirstOrDefault(u => u.Id == id);
+            if (usuario == null)
+            {
+                throw new KeyNotFoundException("Usuário não encontrado!");
+            }
+            return usuario;
         }
+
 
         public string UpdateProfile(int id, Usuario usuarioAtualizado)
         {
