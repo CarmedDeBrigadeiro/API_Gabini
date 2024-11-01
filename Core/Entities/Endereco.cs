@@ -31,7 +31,7 @@ namespace Core.Entities
         public string CEP { get; set; } = string.Empty;
 
         [ForeignKey("Usuario")]
-        public int UsuarioId { get; set; }
+        public int ID_Usuario { get; set; }
         public Usuario Usuario { get; set; } = new Usuario(); 
     }
 }

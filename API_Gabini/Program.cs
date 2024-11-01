@@ -3,8 +3,8 @@ using Infrastructure.Data;
 using Core.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using Ports.Services;
 using Microsoft.EntityFrameworkCore;
+using API_Gabini.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
