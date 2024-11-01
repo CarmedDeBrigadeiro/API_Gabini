@@ -1,6 +1,6 @@
 ﻿using Core.Entities;
-using Core.Services;
 using Microsoft.AspNetCore.Mvc;
+using Ports.Services;
 
 namespace API_Gabini.Controllers
 {
@@ -8,39 +8,25 @@ namespace API_Gabini.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly AuthService _authService;
+        private readonly IAuthService _authService;
 
-        public AuthController()
+        public AuthController(IAuthService authService)
         {
-            _authService = new AuthService();
+            _authService = authService;
         }
 
         [HttpPost("register")]
         public IActionResult Register([FromBody] Usuario usuario)
         {
             var resultado = _authService.Register(usuario);
-            if (resultado == "Usuário registrado com sucesso!")
-            {
-                return Ok(resultado);
-            }
-            else
-            {
-                return BadRequest(resultado);
-            }
+            return resultado == "Usuário registrado com sucesso!" ? Ok(resultado) : BadRequest(resultado);
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] Usuario login)
+        public IActionResult Login([FromBody] LoginRequest loginRequest)
         {
-            var resultado = _authService.Login(login);
-            if (resultado == "Login realizado com sucesso!")
-            {
-                return Ok(resultado);
-            }
-            else
-            {
-                return Unauthorized(resultado);
-            }
+            var resultado = _authService.Login(loginRequest);
+            return resultado == "Login realizado com sucesso!" ? Ok(resultado) : Unauthorized(resultado);
         }
     }
 }

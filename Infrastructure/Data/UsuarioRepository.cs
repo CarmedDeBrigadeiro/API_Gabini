@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Entities;
 using Core.Interfaces;
+
 using Microsoft.EntityFrameworkCore;
+
 
 namespace Infrastructure.Data
 {
@@ -32,3 +34,4 @@ namespace Infrastructure.Data
 
     }
 }
+
