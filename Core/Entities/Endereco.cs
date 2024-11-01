@@ -5,10 +5,10 @@ namespace Core.Entities
 {
     public class Endereco
     {
-        public int Id { get; set; }
+        public int ID_Endereco { get; set; }
 
         [Required]
-        public string TipoEndereco { get; set; } = string.Empty;
+        public string Tipo_Endereco { get; set; } = string.Empty;
 
         [Required]
         public string Rua { get; set; } = string.Empty;

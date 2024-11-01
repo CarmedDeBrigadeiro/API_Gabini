@@ -6,7 +6,7 @@ namespace Core.Entities
 {
     public class Usuario
     {
-        public int Id { get; set; }
+        public int ID_Usuario { get; set; }
 
         [Required]
         public string Nome { get; set; } = string.Empty;
@@ -26,7 +26,7 @@ namespace Core.Entities
         public string SenhaHash { get; set; } = string.Empty;
 
         [Required]
-        public DateTime DataNascimento { get; set; }
+        public DateTime DataRegistro { get; set; }
 
         [Required]
         [Phone]

@@ -1,10 +1,12 @@
 ﻿using Core.Entities;
+using Ports.Services;
+using System.Threading.Tasks;
 
-namespace Ports.Services
+namespace Core.Interfaces
 {
     public interface IAuthService
     {
-        string Register(Usuario usuario);
-        string Login(LoginRequest loginRequest);
+        Task<string> Register(Usuario usuario);
+        Task<string> Login(LoginRequest loginRequest);
     }
 }
