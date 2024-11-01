@@ -3,6 +3,7 @@ using Core.Interfaces;
 using Ports.Services;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Core.Services
 {
@@ -10,23 +11,29 @@ namespace Core.Services
     {
         private static List<Usuario> usuarios = new List<Usuario>();
 
-        public string Register(Usuario usuario)
+        public async Task<string> Register(Usuario usuario)
         {
-            var usuarioExistente = usuarios.Any(u => u.Username == usuario.Username);
-            if (usuarioExistente)
-                return "Usuário já registrado!";
+            return await Task.Run(() =>
+            {
+                var usuarioExistente = usuarios.Any(u => u.Username == usuario.Username);
+                if (usuarioExistente)
+                    return "Usuário já registrado!";
 
-            usuarios.Add(usuario);
-            return "Usuário registrado com sucesso!";
+                usuarios.Add(usuario);
+                return "Usuário registrado com sucesso!";
+            });
         }
 
-        public string Login(LoginRequest loginRequest)
+        public async Task<string> Login(LoginRequest loginRequest)
         {
-            var usuario = usuarios.FirstOrDefault(u => u.Email == loginRequest.Email && u.SenhaHash == loginRequest.SenhaHash);
-            if (usuario == null)
-                return "Usuário ou senha inválidos!";
+            return await Task.Run(() =>
+            {
+                var usuario = usuarios.FirstOrDefault(u => u.Email == loginRequest.Email && u.SenhaHash == loginRequest.SenhaHash);
+                if (usuario == null)
+                    return "Usuário ou senha inválidos!";
 
-            return "Login realizado com sucesso!";
+                return "Login realizado com sucesso!";
+            });
         }
     }
 }
