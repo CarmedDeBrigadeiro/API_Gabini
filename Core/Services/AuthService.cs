@@ -20,9 +20,9 @@ namespace Core.Services
             return "Usuário registrado com sucesso!";
         }
 
-        public string Login(Usuario login)
+        public string Login(LoginRequest loginRequest)
         {
-            var usuario = usuarios.FirstOrDefault(u => u.Username == login.Username && u.SenhaHash == login.SenhaHash);
+            var usuario = usuarios.FirstOrDefault(u => u.Email == loginRequest.Email && u.SenhaHash == loginRequest.SenhaHash);
             if (usuario == null)
                 return "Usuário ou senha inválidos!";
 
@@ -30,4 +30,3 @@ namespace Core.Services
         }
     }
 }
-    

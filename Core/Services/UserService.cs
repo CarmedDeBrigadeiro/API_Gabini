@@ -21,20 +21,19 @@ namespace Core.Services
                 return "Usuário não encontrado!";
 
             usuario.Nome = usuarioAtualizado.Nome;
+            usuario.Sobrenome = usuarioAtualizado.Sobrenome;
+            usuario.Username = usuarioAtualizado.Username;
             usuario.Email = usuarioAtualizado.Email;
+            usuario.SenhaHash = usuarioAtualizado.SenhaHash;
+            usuario.DataNascimento = usuarioAtualizado.DataNascimento;
             usuario.Telefone = usuarioAtualizado.Telefone;
+            usuario.Genero = usuarioAtualizado.Genero;
+            usuario.CPF = usuarioAtualizado.CPF;
+            usuario.FotoUrl = usuarioAtualizado.FotoUrl;
+
+            usuario.Enderecos = usuarioAtualizado.Enderecos;
 
             return "Perfil atualizado com sucesso!";
-        }
-
-        public string ChangePassword(int id, string newPassword)
-        {
-            var usuario = usuarios.FirstOrDefault(u => u.Id == id);
-            if (usuario == null)
-                return "Usuário não encontrado!";
-
-            usuario.SenhaHash = newPassword;
-            return "Senha alterada com sucesso!";
         }
 
         public string DeleteUser(int id)
