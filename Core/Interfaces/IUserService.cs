@@ -11,7 +11,6 @@ namespace Core.Interfaces
     {
         Usuario GetUserById(int id);
         string UpdateProfile(int id, Usuario usuario);
-        string ChangePassword(int id, string newPassword);
         string DeleteUser(int id);
     }
 }

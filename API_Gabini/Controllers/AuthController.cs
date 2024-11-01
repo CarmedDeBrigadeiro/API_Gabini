@@ -1,5 +1,4 @@
 ﻿using Core.Entities;
-using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Ports.Services;
 
@@ -24,9 +23,9 @@ namespace API_Gabini.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] Usuario login)
+        public IActionResult Login([FromBody] LoginRequest loginRequest)
         {
-            var resultado = _authService.Login(login);
+            var resultado = _authService.Login(loginRequest);
             return resultado == "Login realizado com sucesso!" ? Ok(resultado) : Unauthorized(resultado);
         }
     }
