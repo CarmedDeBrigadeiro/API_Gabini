@@ -9,36 +9,37 @@ namespace Core.Entities
         public int Id { get; set; }
 
         [Required]
-        public string Nome { get; set; }
+        public string Nome { get; set; } = string.Empty;
 
         [Required]
-        public string Sobrenome { get; set; }
+        public string Sobrenome { get; set; } = string.Empty;
 
         [Required]
-        public string Username { get; set; }
+        public string Username { get; set; } = string.Empty;
 
         [Required]
         [EmailAddress]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
+
 
         [Required]
-        public string SenhaHash { get; set; } 
+        public string SenhaHash { get; set; } = string.Empty;
 
         [Required]
         public DateTime DataNascimento { get; set; }
 
         [Required]
         [Phone]
-        public string Telefone { get; set; }
+        public string Telefone { get; set; } = string.Empty;
 
         [Required]
-        public string Genero { get; set; }
+        public string Genero { get; set; } = string.Empty;
 
         [Required]
-        public string CPF { get; set; }
+        public string CPF { get; set; } = string.Empty;
 
-        public string FotoUrl { get; set; }
+        public string FotoUrl { get; set; } = string.Empty;
 
-        public List<Endereco> Enderecos { get; set; }
+        public List<Endereco> Enderecos { get; set; } = new List<Endereco>();
     }
 }
