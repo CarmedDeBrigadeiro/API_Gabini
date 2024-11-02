@@ -22,5 +22,5 @@
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\Ports\Ports.csproj" />
   </ItemGroup>
-
+	
 </Project>

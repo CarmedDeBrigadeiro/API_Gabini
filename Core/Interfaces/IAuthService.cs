@@ -1,5 +1,4 @@
 ﻿using Core.Entities;
-using Ports.Services;
 using System.Threading.Tasks;
 
 namespace Core.Interfaces
