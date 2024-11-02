@@ -1,15 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+<PropertyGroup>
+	<TargetFramework>net8.0</TargetFramework>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<Nullable>disable</Nullable>
+</PropertyGroup>
 
   <ItemGroup>
     <Folder Include="Secondary\" />
     <Folder Include="Primary\" />
   </ItemGroup>
+	
+<ItemGroup>
+	<ProjectReference Include="..\Core\Core.csproj" />
+	<ProjectReference Include="..\Ports\Ports.csproj" />
+</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
