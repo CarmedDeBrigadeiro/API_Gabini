@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using API_Gabini.Data;
 using Core.Entities;
 using Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Data
+namespace Infrastructure.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {

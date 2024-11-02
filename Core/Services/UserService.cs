@@ -11,7 +11,7 @@ namespace Core.Services
 
         public Usuario GetUserById(int id)
         {
-            var usuario = usuarios.FirstOrDefault(u => u.Id == id);
+            var usuario = usuarios.FirstOrDefault(u => u.ID_Usuario == id);
             if (usuario == null)
             {
                 throw new KeyNotFoundException("Usuário não encontrado!");
@@ -22,7 +22,7 @@ namespace Core.Services
 
         public string UpdateProfile(int id, Usuario usuarioAtualizado)
         {
-            var usuario = usuarios.FirstOrDefault(u => u.Id == id);
+            var usuario = usuarios.FirstOrDefault(u => u.ID_Usuario == id);
             if (usuario == null)
                 return "Usuário não encontrado!";
 
@@ -31,7 +31,7 @@ namespace Core.Services
             usuario.Username = usuarioAtualizado.Username;
             usuario.Email = usuarioAtualizado.Email;
             usuario.SenhaHash = usuarioAtualizado.SenhaHash;
-            usuario.DataNascimento = usuarioAtualizado.DataNascimento;
+            usuario.Data_Registro = usuarioAtualizado.Data_Registro;
             usuario.Telefone = usuarioAtualizado.Telefone;
             usuario.Genero = usuarioAtualizado.Genero;
             usuario.CPF = usuarioAtualizado.CPF;
@@ -44,7 +44,7 @@ namespace Core.Services
 
         public string DeleteUser(int id)
         {
-            var usuario = usuarios.FirstOrDefault(u => u.Id == id);
+            var usuario = usuarios.FirstOrDefault(u => u.ID_Usuario == id);
             if (usuario == null)
                 return "Usuário não encontrado!";
 
