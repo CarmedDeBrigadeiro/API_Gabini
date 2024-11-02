@@ -36,7 +36,7 @@ if (app.Environment.IsDevelopment())
 
 // Habilita o middleware do Swagger
 app.UseSwagger();
-app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API_Gabini v1")); // Configura a interface do Swagger
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API_Gabini v1")); 
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
