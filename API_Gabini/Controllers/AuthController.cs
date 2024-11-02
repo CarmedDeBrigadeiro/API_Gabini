@@ -1,6 +1,7 @@
 ﻿using Core.Entities;
+using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Ports.Services;
+using System.Threading.Tasks;
 
 namespace API_Gabini.Controllers
 {
@@ -16,16 +17,16 @@ namespace API_Gabini.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register([FromBody] Usuario usuario)
+        public async Task<IActionResult> Register([FromBody] Usuario usuario)
         {
-            var resultado = _authService.Register(usuario);
+            var resultado = await _authService.Register(usuario);
             return resultado == "Usuário registrado com sucesso!" ? Ok(resultado) : BadRequest(resultado);
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginRequest loginRequest)
+        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
-            var resultado = _authService.Login(loginRequest);
+            var resultado = await _authService.Login(loginRequest);
             return resultado == "Login realizado com sucesso!" ? Ok(resultado) : Unauthorized(resultado);
         }
     }
