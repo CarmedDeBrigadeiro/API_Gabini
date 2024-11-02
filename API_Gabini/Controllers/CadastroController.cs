@@ -3,7 +3,7 @@ using Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace API_Gabini.Controllers
+namespace API_Gabini.Controllers    
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -17,14 +17,14 @@ namespace API_Gabini.Controllers
         }
             
 
-        //[HttpPost("register")]
-        //public async Task<IActionResult> Register([FromBody] Usuario usuario)
-        //{
-        //    var result = await _authService.Register(usuario);
-        //    if (result == "Usuário já registrado!")
-        //        return Conflict(result);
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] Usuario usuario)
+        {
+            var result = await _authService.Register(usuario);
+            if (result == "Usuário já registrado!")
+                return Conflict(result);
 
-        //    return Ok(result);
-        //}
+            return Ok(result);
+        }
     }
 }
