@@ -16,11 +16,20 @@ namespace API_Gabini.Controllers
         }
 
         [HttpGet("{id}")]
+
         public IActionResult GetUserById(int id)
         {
-            var usuario = _userService.GetUserById(id);
-            return usuario != null ? Ok(usuario) : NotFound("Usuário não encontrado!");
+            try
+            {
+                var usuario = _userService.GetUserById(id);
+                return Ok(usuario); 
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
         }
+
 
         [HttpPut("{id}")]
         public IActionResult UpdateProfile(int id, [FromBody] Usuario usuarioAtualizado)
