@@ -14,7 +14,7 @@ namespace Core.Services
         {
             return await Task.Run(() =>
             {
-                var usuarioExistente = usuarios.Any(u => u.Username == usuario.Username);
+                var usuarioExistente = usuarios.Any(u => u.ID_Usuario == usuario.ID_Usuario);
                 if (usuarioExistente)
                     return "Usuário já registrado!";
 
