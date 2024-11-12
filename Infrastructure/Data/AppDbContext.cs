@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace API_Gabini.Data
 {
@@ -40,5 +41,9 @@ namespace API_Gabini.Data
                       .OnDelete(DeleteBehavior.Cascade);
             });
         }
+
+        public DbSet<Produto> Produtos { get; set; } 
+
+  
     }
 }
