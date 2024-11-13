@@ -20,14 +20,16 @@ namespace API_Gabini.Controllers
         public async Task<IActionResult> Register([FromBody] Usuario usuario)
         {
             var resultado = await _authService.Register(usuario);
-            return resultado == "Usuário registrado com sucesso!" ? Ok(resultado) : BadRequest(resultado);
+            return resultado.Mensagem == "Usuário registrado com sucesso!" ? Ok(resultado) : BadRequest(resultado.Mensagem);
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
             var resultado = await _authService.Login(loginRequest);
-            return resultado == "Login realizado com sucesso!" ? Ok(resultado) : Unauthorized(resultado);
+
+            // Comparando com a propriedade Mensagem, não com o objeto inteiro
+            return resultado.Mensagem == "Login realizado com sucesso!" ? Ok(resultado) : Unauthorized(resultado.Mensagem);
         }
     }
 }

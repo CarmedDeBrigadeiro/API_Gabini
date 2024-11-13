@@ -16,17 +16,26 @@ namespace API_Gabini.Controllers
         }
 
         [HttpGet("{id}")]
-
         public IActionResult GetUserById(int id)
         {
             try
             {
                 var usuario = _userService.GetUserById(id);
-                return Ok(usuario); 
+
+                if (usuario == null)
+                {
+                    return NotFound(new { message = "Usuário não encontrado" });
+                }
+
+                return Ok(usuario);
             }
             catch (KeyNotFoundException ex)
             {
                 return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Erro interno no servidor", detalhe = ex.Message });
             }
         }
 
@@ -46,3 +55,4 @@ namespace API_Gabini.Controllers
         }
     }
 }
+    
