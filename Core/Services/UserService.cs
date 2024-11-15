@@ -1,4 +1,5 @@
-﻿using Core.Entities;
+﻿using Core.DTOs;
+using Core.Entities;
 using Core.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,22 +8,41 @@ namespace Core.Services
 {
     public class UserService : IUserService
     {
-        private static List<Usuario> usuarios = new List<Usuario>();
+        private readonly IUsuarioRepository _usuarioRepository;
 
-        public Usuario GetUserById(int id)
+        public UserService(IUsuarioRepository usuarioRepository)
         {
-            var usuario = usuarios.FirstOrDefault(u => u.ID_Usuario == id);
+            _usuarioRepository = usuarioRepository;
+        }
+
+        public UsuarioDTO GetUserById(int id)
+        {
+            var usuario = _usuarioRepository.ObterUsuarioAsync(id.ToString()).Result; 
+
             if (usuario == null)
             {
                 throw new KeyNotFoundException("Usuário não encontrado!");
             }
-            return usuario;
-        }
 
+            var usuarioDto = new UsuarioDTO(
+                usuario.ID_Usuario,
+                usuario.Nome,
+                usuario.Email,
+                usuario.Telefone,
+                usuario.Sobrenome,
+                usuario.Username,
+                usuario.Data_Registro,
+                usuario.Telefone,
+                usuario.Genero,
+                usuario.CPF,
+                usuario.Enderecos);
+
+            return usuarioDto;
+        }
 
         public string UpdateProfile(int id, Usuario usuarioAtualizado)
         {
-            var usuario = usuarios.FirstOrDefault(u => u.ID_Usuario == id);
+            var usuario = _usuarioRepository.ObterUsuarioAsync(id.ToString()).Result;
             if (usuario == null)
                 return "Usuário não encontrado!";
 
@@ -39,16 +59,18 @@ namespace Core.Services
 
             usuario.Enderecos = usuarioAtualizado.Enderecos;
 
+            _usuarioRepository.AdicionarUsuarioAsync(usuario); // Atualizando o banco
+
             return "Perfil atualizado com sucesso!";
         }
 
         public string DeleteUser(int id)
         {
-            var usuario = usuarios.FirstOrDefault(u => u.ID_Usuario == id);
+            var usuario = _usuarioRepository.ObterUsuarioAsync(id.ToString()).Result;
             if (usuario == null)
                 return "Usuário não encontrado!";
 
-            usuarios.Remove(usuario);
+            _usuarioRepository.RemoverUsuarioAsync(usuario); // Excluindo o usuário no repositório
             return "Usuário excluído com sucesso!";
         }
     }
