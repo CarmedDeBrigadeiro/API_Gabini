@@ -1,16 +1,14 @@
-﻿using Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Core.DTOs;
+using Core.Entities;
 using System.Threading.Tasks;
 
 namespace Core.Interfaces
 {
     public interface IUserService
     {
-        Usuario GetUserById(int id);
-        string UpdateProfile(int id, Usuario usuario);
-        string DeleteUser(int id);
+        Task<UsuarioDTO> GetUserByIdAsync(int id);
+        Task<string> UpdateProfileAsync(int id, Usuario usuario);
+        Task<string> DeleteUserAsync(int id);
     }
+
 }

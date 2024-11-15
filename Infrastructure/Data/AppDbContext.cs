@@ -10,6 +10,7 @@ namespace API_Gabini.Data
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
+        public DbSet<Produto> Produtos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -42,8 +43,7 @@ namespace API_Gabini.Data
             });
         }
 
-        public DbSet<Produto> Produtos { get; set; } 
 
-  
+
     }
 }

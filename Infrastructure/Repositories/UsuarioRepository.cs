@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using API_Gabini.Data;
+﻿using API_Gabini.Data;
 using Core.Entities;
 using Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Core.DTOs;
+using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
@@ -25,10 +22,11 @@ namespace Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        
         public async Task<Usuario?> ObterUsuarioAsync(string username)
         {
-            return await _context.Usuarios.FirstOrDefaultAsync(u => u.Username == username);
+            return await _context.Usuarios
+                .FirstOrDefaultAsync(u => u.Username == username);
         }
+
     }
 }
