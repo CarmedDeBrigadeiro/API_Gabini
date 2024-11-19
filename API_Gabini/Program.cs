@@ -8,6 +8,7 @@ using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+/*using Paket;*/
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // Registra os serviços de repositórios e serviços
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IAuthService, AuthService>(); 
 builder.Services.AddScoped<IUserService, UserService>();
 
 // Configuração do Swagger
@@ -31,7 +32,7 @@ builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin", builder =>
-        builder.WithOrigins("http://localhost:8080")  
+        builder.WithOrigins("http://localhost:8080")
                .AllowAnyMethod()
                .AllowAnyHeader());
 });
@@ -76,7 +77,7 @@ app.UseCors("AllowSpecificOrigin");
 app.UseHttpsRedirection();
 
 // Ativa a autenticação com JWT
-app.UseAuthentication();  
+app.UseAuthentication();
 
 // Ativa a autorização
 app.UseAuthorization();

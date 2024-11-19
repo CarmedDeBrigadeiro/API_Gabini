@@ -1,5 +1,5 @@
-﻿using Core.Entities;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Core.Entities;
 
 namespace Core.Interfaces
 {
@@ -7,5 +7,6 @@ namespace Core.Interfaces
     {
         Task AdicionarUsuarioAsync(Usuario usuario);
         Task<Usuario?> ObterUsuarioAsync(string username);
+        Task RemoverUsuarioAsync(Usuario usuario); 
     }
 }

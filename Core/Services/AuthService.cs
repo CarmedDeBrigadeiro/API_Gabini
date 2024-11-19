@@ -1,36 +1,33 @@
 ﻿using Core.Entities;
-using Core.DTOs;
 using Core.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace Core.Services
+namespace API_Gabini.Controllers
 {
-    public class AuthService : IAuthService
+    [ApiController]
+    [Route("api/[controller]")]
+    public class AuthController : ControllerBase
     {
-        private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IAuthService _authService;
 
-        public AuthService(IUsuarioRepository usuarioRepository)
+        public AuthController(IAuthService authService)
         {
-            _usuarioRepository = usuarioRepository;
+            _authService = authService;
         }
 
-        public async Task<string> Register(Usuario usuario)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] Usuario usuario)
         {
-            var usuarioExistente = await _usuarioRepository.ObterUsuarioAsync(usuario.Username);
-            if (usuarioExistente != null)
-                return "Usuário já registrado!";
-
-            await _usuarioRepository.AdicionarUsuarioAsync(usuario);
-            return "Usuário registrado com sucesso!";
+            var sucesso = await _authService.Register(usuario);
+            return sucesso ? Ok("Usuário registrado com sucesso!") : BadRequest("Erro ao registrar o usuário.");
         }
 
-        public async Task<string> Login(LoginRequest loginRequest)
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
-            var usuario = await _usuarioRepository.ObterUsuarioAsync(loginRequest.Email);
-            if (usuario == null || usuario.SenhaHash != loginRequest.SenhaHash)
-                return "Usuário ou senha inválidos!";
-
-            return "Login realizado com sucesso!";
+            var sucesso = await _authService.Login(loginRequest);
+            return sucesso ? Ok("Login realizado com sucesso!") : Unauthorized("Credenciais inválidas.");
         }
     }
 }

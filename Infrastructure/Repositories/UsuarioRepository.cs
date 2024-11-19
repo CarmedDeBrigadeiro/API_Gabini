@@ -2,7 +2,6 @@
 using Core.Entities;
 using Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Core.DTOs;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
@@ -25,8 +24,14 @@ namespace Infrastructure.Repositories
         public async Task<Usuario?> ObterUsuarioAsync(string username)
         {
             return await _context.Usuarios
-                .FirstOrDefaultAsync(u => u.Username == username);
+                                 .Include(u => u.Enderecos) 
+                                 .FirstOrDefaultAsync(u => u.Username == username);
         }
 
+        public async Task RemoverUsuarioAsync(Usuario usuario)
+        {
+            _context.Usuarios.Remove(usuario);
+            await _context.SaveChangesAsync();
+        }
     }
 }

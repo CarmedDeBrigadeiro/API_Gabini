@@ -2,7 +2,7 @@
 using Core.Entities;
 using Core.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace Core.Services
 {
@@ -15,16 +15,16 @@ namespace Core.Services
             _usuarioRepository = usuarioRepository;
         }
 
-        public UsuarioDTO GetUserById(int id)
+        public async Task<UsuarioDTO> GetUserByIdAsync(int id)
         {
-            var usuario = _usuarioRepository.ObterUsuarioAsync(id.ToString()).Result; 
+            var usuario = await _usuarioRepository.ObterUsuarioAsync(id.ToString());
 
             if (usuario == null)
             {
                 throw new KeyNotFoundException("Usuário não encontrado!");
             }
 
-            var usuarioDto = new UsuarioDTO(
+            return new UsuarioDTO(
                 usuario.ID_Usuario,
                 usuario.Nome,
                 usuario.Email,
@@ -36,13 +36,11 @@ namespace Core.Services
                 usuario.Genero,
                 usuario.CPF,
                 usuario.Enderecos);
-
-            return usuarioDto;
         }
 
-        public string UpdateProfile(int id, Usuario usuarioAtualizado)
+        public async Task<string> UpdateProfileAsync(int id, Usuario usuarioAtualizado)
         {
-            var usuario = _usuarioRepository.ObterUsuarioAsync(id.ToString()).Result;
+            var usuario = await _usuarioRepository.ObterUsuarioAsync(id.ToString());
             if (usuario == null)
                 return "Usuário não encontrado!";
 
@@ -56,21 +54,20 @@ namespace Core.Services
             usuario.Genero = usuarioAtualizado.Genero;
             usuario.CPF = usuarioAtualizado.CPF;
             usuario.FotoUrl = usuarioAtualizado.FotoUrl;
-
             usuario.Enderecos = usuarioAtualizado.Enderecos;
 
-            _usuarioRepository.AdicionarUsuarioAsync(usuario); // Atualizando o banco
+            await _usuarioRepository.AdicionarUsuarioAsync(usuario); // Atualizando o banco
 
             return "Perfil atualizado com sucesso!";
         }
 
-        public string DeleteUser(int id)
+        public async Task<string> DeleteUserAsync(int id)
         {
-            var usuario = _usuarioRepository.ObterUsuarioAsync(id.ToString()).Result;
+            var usuario = await _usuarioRepository.ObterUsuarioAsync(id.ToString());
             if (usuario == null)
                 return "Usuário não encontrado!";
 
-            _usuarioRepository.RemoverUsuarioAsync(usuario); // Excluindo o usuário no repositório
+            await _usuarioRepository.RemoverUsuarioAsync(usuario); 
             return "Usuário excluído com sucesso!";
         }
     }

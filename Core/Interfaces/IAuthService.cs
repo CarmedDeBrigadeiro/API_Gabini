@@ -5,7 +5,7 @@ namespace Core.Interfaces
 {
     public interface IAuthService
     {
-        Task<string> Register(Usuario usuario);
-        Task<string> Login(LoginRequest loginRequest);
+        Task<bool> Register(Usuario usuario);
+        Task<bool> Login(LoginRequest loginRequest);
     }
 }

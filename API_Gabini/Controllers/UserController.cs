@@ -1,6 +1,7 @@
 ﻿using Core.Entities;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace API_Gabini.Controllers
 {
@@ -16,11 +17,11 @@ namespace API_Gabini.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetUserById(int id)
+        public async Task<IActionResult> GetUserById(int id)
         {
             try
             {
-                var usuario = _userService.GetUserById(id);
+                var usuario = await _userService.GetUserByIdAsync(id);  // Alteração aqui
 
                 if (usuario == null)
                 {
@@ -39,20 +40,18 @@ namespace API_Gabini.Controllers
             }
         }
 
-
         [HttpPut("{id}")]
-        public IActionResult UpdateProfile(int id, [FromBody] Usuario usuarioAtualizado)
+        public async Task<IActionResult> UpdateProfile(int id, [FromBody] Usuario usuarioAtualizado)
         {
-            var resultado = _userService.UpdateProfile(id, usuarioAtualizado);
+            var resultado = await _userService.UpdateProfileAsync(id, usuarioAtualizado);  // Alteração aqui
             return resultado == "Perfil atualizado com sucesso!" ? Ok(resultado) : NotFound(resultado);
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteUser(int id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
-            var resultado = _userService.DeleteUser(id);
+            var resultado = await _userService.DeleteUserAsync(id);  // Alteração aqui
             return resultado == "Usuário excluído com sucesso!" ? Ok(resultado) : NotFound(resultado);
         }
     }
 }
-    
