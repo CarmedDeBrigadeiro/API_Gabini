@@ -8,7 +8,6 @@ using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-/*using Paket;*/
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,13 +37,13 @@ builder.Services.AddCors(options =>
 });
 
 // Configura a autenticação JWT
-var secretKey = builder.Configuration["Jwt:SecretKey"];
+/*var secretKey = builder.Configuration["Jwt:SecretKey"];
 if (string.IsNullOrEmpty(secretKey))
 {
     throw new InvalidOperationException("A chave secreta do JWT não foi configurada.");
-}
+}*/
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+/*builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
@@ -56,7 +55,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidAudience = builder.Configuration["Jwt:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
         };
-    });
+    });*/
 
 var app = builder.Build();
 
