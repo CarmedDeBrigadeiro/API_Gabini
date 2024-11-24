@@ -1,12 +1,18 @@
 ﻿using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
 namespace API_Gabini.Data
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+
+        public AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration configuration)
+            : base(options)
+        {
+        }
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
@@ -41,6 +47,15 @@ namespace API_Gabini.Data
                 entity.HasOne<Usuario>().WithMany(u => u.Enderecos).HasForeignKey(e => e.ID_Usuario)
                       .OnDelete(DeleteBehavior.Cascade);
             });
+
+            modelBuilder.Entity<Produto>(entity =>
+            {
+                entity.HasKey(p => p.ID_Produto);
+                entity.Property(p => p.Nome).IsRequired().HasMaxLength(255);
+                entity.Property(p => p.Preco).IsRequired()
+                      .HasColumnType("decimal(18,2)");
+            });
+
         }
 
 

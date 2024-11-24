@@ -1,33 +1,35 @@
 ﻿using Core.Entities;
 using Core.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace API_Gabini.Controllers
+namespace Core.Services
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class AuthController : ControllerBase
+    public class AuthService : IAuthService
     {
-        private readonly IAuthService _authService;
+        private readonly IUsuarioRepository _usuarioRepository;
 
-        public AuthController(IAuthService authService)
+        public AuthService(IUsuarioRepository usuarioRepository)
         {
-            _authService = authService;
+            _usuarioRepository = usuarioRepository;
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] Usuario usuario)
+        public async Task<bool> Register(Usuario usuario)
         {
-            var sucesso = await _authService.Register(usuario);
-            return sucesso ? Ok("Usuário registrado com sucesso!") : BadRequest("Erro ao registrar o usuário.");
+            var usuarioExistente = await _usuarioRepository.ObterUsuarioAsync(usuario.Email);
+            if (usuarioExistente != null)
+                return false;
+
+            await _usuarioRepository.AdicionarUsuarioAsync(usuario);
+            return true;
         }
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
+        public async Task<bool> Login(LoginRequest loginRequest)
         {
-            var sucesso = await _authService.Login(loginRequest);
-            return sucesso ? Ok("Login realizado com sucesso!") : Unauthorized("Credenciais inválidas.");
+            var usuario = await _usuarioRepository.ObterUsuarioAsync(loginRequest.Email);
+            if (usuario == null || usuario.SenhaHash != loginRequest.SenhaHash)
+                return false;
+
+            return true;
         }
     }
 }
