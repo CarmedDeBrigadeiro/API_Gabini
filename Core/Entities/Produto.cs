@@ -4,7 +4,7 @@ namespace Core.Entities
 {
     public class Produto
     {
-        public int Id { get; set; }
+        public int ID_Produto { get; set; }
 
         [Required]
         public string Nome { get; set; }

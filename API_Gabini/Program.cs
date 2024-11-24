@@ -11,12 +11,17 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configura o DbContext para usar SQL Server com a string de conexão do appsettings.json
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseMySql(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
+    ));
+
 
 // Registra os serviços de repositórios e serviços
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-builder.Services.AddScoped<IAuthService, AuthService>(); 
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
 // Configuração do Swagger
@@ -36,26 +41,21 @@ builder.Services.AddCors(options =>
                .AllowAnyHeader());
 });
 
-// Configura a autenticação JWT
-/*var secretKey = builder.Configuration["Jwt:SecretKey"];
-if (string.IsNullOrEmpty(secretKey))
-{
-    throw new InvalidOperationException("A chave secreta do JWT não foi configurada.");
-}*/
-
-/*builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
-        };
-    });*/
+// Configura a autenticação JWT (comentada por enquanto)
+// var secretKey = builder.Configuration["Jwt:SecretKey"];
+// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//     .AddJwtBearer(options =>
+//     {
+//         options.TokenValidationParameters = new TokenValidationParameters
+//         {
+//             ValidateIssuer = true,
+//             ValidateAudience = true,
+//             ValidateLifetime = true,
+//             ValidIssuer = builder.Configuration["Jwt:Issuer"],
+//             ValidAudience = builder.Configuration["Jwt:Audience"],
+//             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+//         };
+//     });
 
 var app = builder.Build();
 
@@ -83,6 +83,13 @@ app.UseAuthorization();
 
 // Mapeia os controllers
 app.MapControllers();
+
+// Aplica migrações pendentes ao iniciar a aplicação
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dbContext.Database.Migrate();
+}
 
 // Executa a aplicação
 app.Run();
