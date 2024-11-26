@@ -1,6 +1,7 @@
 ﻿using Core.Entities;
 using Core.Interfaces;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Core.Services
 {
@@ -13,9 +14,10 @@ namespace Core.Services
             _productRepository = productRepository;
         }
 
-        public IEnumerable<Produto> GetAllProdutos()
+        public async Task<IEnumerable<Produto>> GetAllProdutosAsync()
         {
-            return _productRepository.GetAll();
+            var produtos = await _productRepository.GetAllAsync();
+            return produtos;
         }
     }
 }

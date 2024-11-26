@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Core.Entities;
+#nullable enable
 
 namespace Core.Interfaces
 {
