@@ -28,7 +28,7 @@ namespace API_Gabini.Data
                 entity.Property(u => u.Sobrenome).IsRequired().HasMaxLength(255);
                 entity.Property(u => u.Email).IsRequired().HasMaxLength(255);
                 entity.HasIndex(u => u.Email).IsUnique();
-                entity.Property(u => u.SenhaHash).IsRequired().HasMaxLength(255);
+                entity.Property(u => u.Senha).IsRequired().HasMaxLength(255);
                 entity.Property(u => u.CPF).IsRequired().HasMaxLength(14);
                 entity.HasIndex(u => u.CPF).IsUnique();
                 entity.Property(u => u.Data_Registro).HasDefaultValueSql("CURRENT_TIMESTAMP");

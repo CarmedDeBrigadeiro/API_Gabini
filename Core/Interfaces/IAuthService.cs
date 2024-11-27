@@ -6,6 +6,11 @@ namespace Core.Interfaces
     public interface IAuthService
     {
         Task<bool> Register(Usuario usuario);
-        Task<bool> Login(LoginRequest loginRequest);
+        Task<string> Login(LoginRequest loginRequest);  // Retorno do tipo string (token)
+        string GetJwtKey();
+        string GetJwtIssuer();
+        string GetJwtAudience();
     }
+
+
 }

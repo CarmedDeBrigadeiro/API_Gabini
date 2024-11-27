@@ -81,7 +81,7 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("SenhaHash")
+                    b.Property<string>("Senha")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
