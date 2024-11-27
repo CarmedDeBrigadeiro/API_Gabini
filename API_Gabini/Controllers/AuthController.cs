@@ -1,6 +1,7 @@
 ﻿using Core.Entities;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using System.Threading.Tasks;
 
 namespace API_Gabini.Controllers
@@ -26,8 +27,12 @@ namespace API_Gabini.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
-            var sucesso = await _authService.Login(loginRequest);
-            return sucesso ? Ok("Login realizado com sucesso!") : Unauthorized("Credenciais inválidas.");
+            var token = await _authService.Login(loginRequest);
+            if (token == null)
+                return Unauthorized("Credenciais inválidas.");
+
+            return Ok(new { Token = token });  
         }
     }
+
 }
