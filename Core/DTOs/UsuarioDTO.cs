@@ -22,7 +22,7 @@ namespace Core.DTOs
         public string Email { get; set; } = string.Empty;
 
         [Required]
-        public string SenhaHash { get; set; } = string.Empty;
+        public string Senha { get; set; } = string.Empty;
 
         [Required]
         public DateTime Data_Registro { get; set; }
@@ -41,14 +41,14 @@ namespace Core.DTOs
 
         public List<Endereco> Enderecos { get; set; } = new List<Endereco>();
 
-        public UsuarioDTO(int id, string nome, string sobrenome, string username, string email, string senhaHash, DateTime dataRegistro, string telefone, string genero, string cpf, List<Endereco> enderecos)
+        public UsuarioDTO(int id, string nome, string sobrenome, string username, string email, string senha, DateTime dataRegistro, string telefone, string genero, string cpf, List<Endereco> enderecos)
         {
             ID_Usuario = id;
             Nome = nome;
             Sobrenome = sobrenome;
             Username = username;
             Email = email;
-            SenhaHash = senhaHash;
+            Senha = senha;
             Data_Registro = dataRegistro;
             Telefone = telefone;
             Genero = genero;

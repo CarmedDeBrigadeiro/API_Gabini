@@ -1,9 +1,7 @@
-﻿using API_Gabini.Data;
-using Core.Entities;
+﻿using Core.Entities;
 using Core.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace Infrastructure.Repositories
 {
@@ -11,14 +9,8 @@ namespace Infrastructure.Repositories
     {
         private readonly AppDbContext _dbContext;
 
-        public ProductRepository(AppDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+        public ProductRepository(AppDbContext context) => _context = context;
 
-        public async Task<IEnumerable<Produto>> GetAllAsync()
-        {
-            return await _dbContext.Produtos.ToListAsync();
-        }
+        public IEnumerable<Produto> GetAll() => _context.Produtos.ToList();
     }
 }

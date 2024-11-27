@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241122235854_MigracaoInicial")]
-    partial class MigracaoInicial
+    [Migration("20241127133608_changeHashToOnlySenha")]
+    partial class changeHashToOnlySenha
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

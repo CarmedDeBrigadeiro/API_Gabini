@@ -48,7 +48,7 @@ namespace Core.Services
             usuario.Sobrenome = usuarioAtualizado.Sobrenome;
             usuario.Username = usuarioAtualizado.Username;
             usuario.Email = usuarioAtualizado.Email;
-            usuario.SenhaHash = usuarioAtualizado.SenhaHash;
+            usuario.Senha = usuarioAtualizado.Senha;
             usuario.Data_Registro = usuarioAtualizado.Data_Registro;
             usuario.Telefone = usuarioAtualizado.Telefone;
             usuario.Genero = usuarioAtualizado.Genero;

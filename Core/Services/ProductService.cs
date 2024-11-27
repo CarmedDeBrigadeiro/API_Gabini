@@ -19,5 +19,6 @@ namespace Core.Services
             var produtos = await _productRepository.GetAllAsync();
             return produtos;
         }
+
     }
 }
