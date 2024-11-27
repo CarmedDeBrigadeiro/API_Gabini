@@ -23,7 +23,7 @@ namespace Core.Entities
 
 
         [Required]
-        public string SenhaHash { get; set; } = string.Empty;
+        public string Senha { get; set; } = string.Empty;
 
         [Required]
         public DateTime Data_Registro { get; set; }

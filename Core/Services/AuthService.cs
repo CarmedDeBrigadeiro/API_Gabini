@@ -26,7 +26,7 @@ namespace Core.Services
         public async Task<bool> Login(LoginRequest loginRequest)
         {
             var usuario = await _usuarioRepository.ObterUsuarioAsync(loginRequest.Email);
-            if (usuario == null || usuario.SenhaHash != loginRequest.SenhaHash)
+            if (usuario == null || usuario.Senha != loginRequest.Senha)
                 return false;
 
             return true;
