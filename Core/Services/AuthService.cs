@@ -44,8 +44,8 @@ namespace Core.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] {
-            new Claim(ClaimTypes.Name, usuario.Email)
-        }),
+                    new Claim(ClaimTypes.Name, usuario.Email)
+                }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 Issuer = _configuration["Jwt:Issuer"],
                 Audience = _configuration["Jwt:Audience"],
@@ -55,8 +55,6 @@ namespace Core.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token); // Retorna o token gerado
         }
-
-
 
         public string GetJwtKey()
         {
