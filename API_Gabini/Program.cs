@@ -24,6 +24,8 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+
 
 // Configuração do Swagger
 builder.Services.AddSwaggerGen(c =>

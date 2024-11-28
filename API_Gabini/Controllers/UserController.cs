@@ -1,4 +1,5 @@
-﻿using Core.Entities;
+﻿using Core.DTOs;
+using Core.Entities;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace API_Gabini.Controllers
                 if (usuario == null)
                 {
                     return NotFound(new { message = "Usuário não encontrado" });
-                }
+            }
 
                 return Ok(usuario);
             }
