@@ -7,30 +7,31 @@ namespace Core.DTOs
         public int ID_Endereco { get; set; }
 
         [Required]
-        public string Tipo_Endereco { get; set; } = string.Empty;
+        public string Tipo_Endereco { get; set; }
 
         [Required]
-        public string Rua { get; set; } = string.Empty;
+        public string Rua { get; set; }
 
         [Required]
-        public string Numero { get; set; } = string.Empty;
+        public string Numero { get; set; }
 
-        public string Complemento { get; set; } = string.Empty;
-
-        [Required]
-        public string Bairro { get; set; } = string.Empty;
+        public string Complemento { get; set; }
 
         [Required]
-        public string Cidade { get; set; } = string.Empty;
+        public string Bairro { get; set; }
 
         [Required]
-        public string Estado { get; set; } = string.Empty;
+        public string Cidade { get; set; }
 
         [Required]
-        public string CEP { get; set; } = string.Empty;
+        public string Estado { get; set; }
+
+        [Required]
+        public string CEP { get; set; }
 
         public int ID_Usuario { get; set; }
 
+        // Construtor
         public EnderecoDTO(
             int idEndereco,
             string tipoEndereco,
