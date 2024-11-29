@@ -16,9 +16,7 @@ namespace Core.Services
 
         public async Task<IEnumerable<Produto>> GetAllProdutosAsync()
         {
-            var produtos = await _productRepository.GetAllAsync();
-            return produtos;
+            return await _productRepository.GetAllProdutosAsync();
         }
-
     }
 }

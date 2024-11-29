@@ -21,11 +21,11 @@ namespace Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Usuario?> ObterUsuarioAsync(string username)
+        public async Task<Usuario?> ObterUsuarioAsync(string email)
         {
             return await _context.Usuarios
                                  .Include(u => u.Enderecos) 
-                                 .FirstOrDefaultAsync(u => u.Username == username);
+                                 .FirstOrDefaultAsync(u => u.Email == email);
         }
 
         public async Task RemoverUsuarioAsync(Usuario usuario)
