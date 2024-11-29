@@ -17,15 +17,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
     ));
 
-
 // Registra os serviços de repositórios e serviços
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-
 
 // Configuração do Swagger
 builder.Services.AddSwaggerGen(c =>
@@ -61,7 +58,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
         };
 
-        // Configurar os eventos de autenticação JWT
         options.Events = new JwtBearerEvents
         {
             OnAuthenticationFailed = context =>
@@ -81,8 +77,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             }
         };
     });
-
-
 
 var app = builder.Build();
 
@@ -111,12 +105,11 @@ app.UseAuthorization();
 // Mapeia os controllers
 app.MapControllers();
 
-// Aplica migrações pendentes ao iniciar a aplicação
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    dbContext.Database.Migrate();
+    await dbContext.Database.MigrateAsync(); 
 }
 
-// Executa a aplicação
-app.Run();
+
+await app.RunAsync(); 

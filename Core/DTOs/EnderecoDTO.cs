@@ -31,7 +31,6 @@ namespace Core.DTOs
 
         public int ID_Usuario { get; set; }
 
-        // Construtor
         public EnderecoDTO(
             int idEndereco,
             string tipoEndereco,
